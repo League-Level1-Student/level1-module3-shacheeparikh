@@ -66,6 +66,7 @@ public class MediaPalace {
 	// t.start();
 	// }
 
+	//works (use src/filename)
 	/* This method will use your default mp3 player to play the song */
 	public void playMusicOnComputer(String fileName) {
 		File fileToPlay = new File(fileName);
@@ -76,11 +77,13 @@ public class MediaPalace {
 		}
 	}
 
+	//works
 	/* If you want to use an mp3, you must first convert it to a .wav file on http://media.io */
 	public AudioClip loadSound(String fileName) {
 		return JApplet.newAudioClip(getClass().getResource(fileName));
 	}
 
+	//doesn't work
 	public void playSoundFromInternet(String soundURL) {
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new URL(soundURL));

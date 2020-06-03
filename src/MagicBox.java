@@ -3,7 +3,7 @@
  *    Level 1
  */
 
-
+import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -11,32 +11,33 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	/*
-	 * We are going to hide secrets within the magic box. 
-	 * When the user clicks on a secret place, stuff will happen.
+	 * We are going to hide secrets within the magic box. When the user clicks
+	 * on a secret place, stuff will happen.
 	 * 
 	 * 1. Make the frame respond to mouse clicks.
 	 * 
-	 * 2. When the mouse is clicked, use the Media Palace (read the code in the default package) to play sounds, show images or speak.
+	 * 2. When the mouse is clicked, use the Media Palace (read the code in the
+	 * default package) to play sounds, show images or speak.
 	 * 
-	 * 3. backgroundImage.getRGB(keyEvent.getX(), keyEvent.getY()) will give you the color of the current pixel.
+	 * 3. backgroundImage.getRGB(keyEvent.getX(), keyEvent.getY()) will give you
+	 * the color of the current pixel.
 	 */
 
 	BufferedImage backgroundImage;
 
 	public static void main(String[] args) throws Exception {
 		SwingUtilities.invokeLater(new MagicBox());
-	
-		
-		
 	}
 
 	@Override
@@ -49,13 +50,18 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		}
 	}
 
+	JFrame frame = new JFrame("The Magic Box contains many secrets...");
+
+
 	private void createUI() {
-		JFrame frame = new JFrame("The Magic Box contains many secrets...");
+
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.addMouseListener(this);
+
 	}
 
 	private void loadBackgroundImage() throws Exception {
@@ -75,33 +81,47 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		MediaPalace m = new MediaPalace();
+		try {
+			JFrame frame2 = new JFrame();
+			JLabel labell = m.loadImageFromTheInternet(
+					"https://dsx.weather.com//util/image/w/BryceCanyonNationalParkUtah.jpg?v=at&w=485&h=273&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0");
+			frame2.add(labell);
+			frame2.setVisible(true);
+			frame2.pack();
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//AudioClip a =m.loadSound("squidward.wav");
+		//a.play();
+		m.playMusicOnComputer("src/squidward.wav");
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
-
-

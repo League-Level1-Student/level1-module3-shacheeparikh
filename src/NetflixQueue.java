@@ -10,6 +10,10 @@ import java.util.Collections;
 
 public class NetflixQueue {
 	
+	public static void main(String[] args) {
+		Movie movie1 = new Movie("end game", 5);
+	}
+	
 	ArrayList<Movie> movies = new ArrayList<Movie>();
 	
 	public Movie getBestMovie(){
